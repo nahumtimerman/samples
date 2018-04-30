@@ -20,12 +20,12 @@ echo "****************************************************************"
 apt-get install apache2 apache2-utils -y
 systemctl enable apache2
 systemctl start apache2
-apt-get install libapache2-mod-wsgi
+apt-get install libapache2-mod-wsgi -y
 
 echo "****************************************************************"
 echo "Installing Flask"
 echo "****************************************************************"
-apt-get install python-pip
+apt-get install python-pip -y
 pip install flask
 
 
