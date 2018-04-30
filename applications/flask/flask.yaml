@@ -12,10 +12,6 @@ infrastructure:                     # These are the infrastructure definitions f
     external:           
     - port_info:        
         path: ''
-        port: 5000                    # Port 5000 will be opened externally to receive rest requests
-
-    - port_info:        
-        path: ''
         port: 80 
 source:
   image:
