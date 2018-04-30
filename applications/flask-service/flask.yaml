@@ -1,0 +1,33 @@
+#   
+#   This application file defines how to deploy and configure a Wordpress application 
+#
+spec_version: 1
+kind: application
+inputs:                             # These inputs are used by the initialization script to configure the connectivity to the database
+  - DB_USER: ''                     # In the script we update the connectivity details which are located in /var/www/html/wp-config.php
+  - DB_PASS: '' 
+  - DB_NAME: '' 
+infrastructure:                     # These are the infrastructure definitions for a single application instance
+  connectivity:
+    external:           
+    - port_info:        
+        path: ''
+        port: 5000                    # Port 5000 will be opened externally to receive rest requests
+
+    - port_info:        
+        path: ''
+        port: 80 
+source:
+  image:
+    ami:                            # This is a clean Ubuntu server image that will be used to create a new EC2 instance in the defined AWS region
+    - id: ami-f90a4880
+      region: eu-west-1             # AWS region
+  os_type: linux
+configuration:                    
+  initialization:                   # The initialization script is executed when the infrastructure is ready
+    script: flask.sh                 # This script installs a flask app on a clean Ubuntu OS.
+  start:
+    script: flask-start.sh        # This script restarts the Apache server after all the initialization completes
+  healthcheck:                      
+      wait_for_ports: ALL           # To validate the installation, we wait to see that the ports are available 
+      timeout: 180
