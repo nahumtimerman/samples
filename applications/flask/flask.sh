@@ -36,7 +36,7 @@ git clone https://github.com/nahumtimerman/flask_app
 
 
 echo ln -sT ~/flask_app /var/www/html/flaskapp
-echo sed -i -e '/DocumentRoot \/var\/www\/html/ r flask_app/scripts/conf_changes' /etc/apache2/sites-enabled/000-default.conf
+sed -i -e '/DocumentRoot \/var\/www\/html/ r flask_app/scripts/conf_changes' /etc/apache2/sites-enabled/000-default.conf
 
 rsync -av flask_app/* /var/www/html/
 chown -R www-data:www-data /var/www/html/
