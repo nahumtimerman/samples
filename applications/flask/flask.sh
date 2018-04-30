@@ -34,11 +34,11 @@ echo "Installing Flask App"
 echo "****************************************************************"
 git clone https://github.com/nahumtimerman/flask_app
 
-
+mkdir /var/www/html/flaskapp
 echo ln -sT ~/flask_app /var/www/html/flaskapp
 sed -i -e '/DocumentRoot \/var\/www\/html/ r flask_app/scripts/conf_changes' /etc/apache2/sites-enabled/000-default.conf
 
-rsync -av flask_app/* /var/www/html/
+rsync -av flask_app/* /var/www/html/flaskapp
 chown -R www-data:www-data /var/www/html/
 chmod -R 755 /var/www/html/
 rm /var/www/html/index.html
