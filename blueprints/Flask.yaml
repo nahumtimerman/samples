@@ -1,0 +1,26 @@
+# A WordPress web site deployed on 2 EC2 instances
+#
+#       [Front End] (Apache, PHP, WordPress)
+#            |
+#       [Back End]  (MySQL)
+#
+
+spec_version: 1           
+kind: blueprint
+metadata:
+  description: A sample blueprint to demonstrate running a restful service over Python Flask.
+clouds:
+- aws: eu-west-1
+inputs:                           # These are the blueprint parameters and their default values. The values can be changed when creating a sandbox based on this blueprint.
+  - DB_USER: root                 # DB_USER, DB_PASS - Used to define the admin account when installing the database
+  - DB_PASS: 123456               
+  - DB_NAME: flask_demo       # DB_NAME - a target database name, used when creating a new database and connecting it to the application
+applications:                     # These are the applications that will be deployed in this blueprint:
+- flask:                      # One instance of a sample flask app (see: applications/flask/flask.yaml)
+    instances: 1
+    input_values:
+    - DB_USER: $DB_USER
+    - DB_PASS: $DB_PASS
+    - DB_NAME: $DB_NAME
+    depends_on:                   # The website depends on MySQL and will start deploying only when the database is ready
+    - mysql

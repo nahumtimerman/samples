@@ -1,5 +1,5 @@
 #   
-#   This application file defines how to deploy and configure a Wordpress application 
+#   This application file defines how to deploy and configure a flask application 
 #
 spec_version: 1
 kind: application
